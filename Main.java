@@ -11,7 +11,6 @@ public class Main
         VII(7),VIII(8),IX(9),X(10);
 
         private int value;
-
         enumForCheckRoman(int value) {
             this.value = value;
         }
@@ -58,7 +57,6 @@ public class Main
         printResult(result);
     }
 
-
     public static String calc(String input) throws Exception{
         String resultOfCalc = null;
 
@@ -75,7 +73,6 @@ public class Main
             }else{
                 System.out.println("throws Exception // т.к. вы ввели числа не из заданного диапазона");
             }
-
 
         } else if(kindOfInputNumbers == 2){
 
