@@ -53,7 +53,11 @@ public class Main
 
     public static void main(String[] args) throws Exception{
         String input = input();
-        String result = calc(input);
+        if(input != null || !input.equals("")) {
+            String result = calc(input);
+        }else{
+            System.out.println("throws Exception // т.к. вы ввели пустую строку");
+        }
         printResult(result);
     }
 
@@ -292,7 +296,7 @@ public class Main
         return resulOfCalc;
     }
 
-     static String transformInttoRoman(int resultOfCalculation){
+    static String transformInttoRoman(int resultOfCalculation){
         String output = null;
 
 
@@ -313,7 +317,7 @@ public class Main
         return output;
     }
 
-     static void printResult(String result){
+    static void printResult(String result){
         if(result != null) {
             System.out.println(result);
         }
