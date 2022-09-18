@@ -53,12 +53,15 @@ public class Main
 
     public static void main(String[] args) throws Exception{
         String input = input();
+        String result = null;
         if(input != null || !input.equals("")) {
-            String result = calc(input);
+           result = calc(input);
         }else{
             System.out.println("throws Exception // т.к. вы ввели пустую строку");
         }
-        printResult(result);
+        if(result != null) {
+            printResult(result);
+        }
     }
 
     public static String calc(String input) throws Exception{
@@ -96,6 +99,7 @@ public class Main
             }
 
         } else if(kindOfInputNumbers == 0){
+
             System.out.println("throws Exception");
         }else if(kindOfInputNumbers == -1){
             System.out.println("throws Exception //т.к. строка не является математической операцией");
@@ -122,7 +126,7 @@ public class Main
 
         for(char x : inputLine){
             if((((int) x >= 47 && (int) x <= 57) || ((int) x == 42 | (int) x == 43 | (int) x == 45)) || x == ' '){
-                if((int) x == 42 | (int) x == 43 | (int) x == 45 | (int) x == 45){
+                if((int) x == 42 | (int) x == 43 | (int) x == 45 | (int) x == 47){
                     countOfOperator++;
                 }
                 if(countOfOperator > 1){
