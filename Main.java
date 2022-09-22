@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Main
 {
-     enum enumForCheckRoman{
+    enum enumForCheckRoman{
         I(1),II(2), III(3), IV(4),  V(5),VI(6),
         VII(7),VIII(8),IX(9),X(10);
 
@@ -19,7 +19,7 @@ public class Main
             return value;
         }
     }
-     enum RomanNumbers{
+    enum RomanNumbers{
         I(1),II(2), III(3), IV(4),  V(5),VI(6),
         VII(7),VIII(8),Ix(9),X(10), XX(20), XXX(30), XL(40),
         L(50), LX(60), LXX(70), LXXX(80), XC(90), C(100);
@@ -52,16 +52,17 @@ public class Main
 
 
     public static void main(String[] args) throws Exception{
+        System.out.println("Введите выражение:");
         String input = input();
         String result = null;
         if(input != null || !input.equals("")) {
-           result = calc(input);
+            result = calc(input);
         }else{
-            System.out.println("throws Exception // т.к. вы ввели пустую строку");
+            throw new IOException("т.к. вы ввели пустую строку");
         }
-        if(result != null) {
-            printResult(result);
-        }
+       // if(result != null) {
+           printResult(result);
+        //}
     }
 
     public static String calc(String input) throws Exception{
@@ -78,7 +79,7 @@ public class Main
             if((inputNumbers[0] > 0 & inputNumbers[0] <= 10) & (inputNumbers[1] > 0 & inputNumbers[1] <= 10)){
                 resultOfCalc = doCalculation(inputNumbers, inputWithoutSpace, "Arabic");
             }else{
-                System.out.println("throws Exception // т.к. вы ввели числа не из заданного диапазона");
+                throw new IOException("т.к. вы ввели числа не из заданного диапазона");
             }
 
         } else if(kindOfInputNumbers == 2){
@@ -95,17 +96,18 @@ public class Main
                 resultOfCalc = doCalculation(inputNumbers, inputWithoutSpace, "Roman");
             }catch(IllegalArgumentException e){
 
-                System.out.println("throws Exception");
+                throw new IOException("т.к. вы ввели числа не из заданного диапазона");
             }
 
         } else if(kindOfInputNumbers == 0){
 
-            System.out.println("throws Exception");
+            throw new IOException("неверный ввод");
         }else if(kindOfInputNumbers == -1){
-            System.out.println("throws Exception //т.к. строка не является математической операцией");
+            throw new IOException("т.к. строка не является математической операцией");
         }
         else if(kindOfInputNumbers == -2){
-            System.out.println("throws Exception // формат математической операции не удовлетворяет заданию");
+            throw new IOException("формат математической операции не удовлетворяет заданию");
+
         }
         return resultOfCalc;
 
@@ -278,7 +280,8 @@ public class Main
                 if(result > 0) {
                     resulOfCalc = transformInttoRoman(result);
                 }else{
-                    System.out.println("throws Exception //т.к. в римской системе нет отрицательных чисел");
+                    throw new RuntimeException("т.к. в римской системе нет отрицательных чисел");
+
                 }
             }
         }else if((operator.indexOf("*")) != -1){
@@ -305,15 +308,18 @@ public class Main
 
 
         for(int i = 10; i <= 100;){
-        int condition = resultOfCalculation - i;
+            int condition = resultOfCalculation - i;
             if(condition >= 1 &&  condition < 10){
-                output = String.valueOf(RomanNumbers.getByValue(i)) + String.valueOf(RomanNumbers.getByValue(condition));;
+                output = String.valueOf(RomanNumbers.getByValue(i)) + String.valueOf(RomanNumbers.getByValue(condition));
+                break;
 
-            }else if((resultOfCalculation - i) == 0){
+            }else if(condition == 0){
 
                 output = String.valueOf(RomanNumbers.getByValue(i));
-            }else{
+                break;
+            }else if(condition < 0){
                 output = String.valueOf(RomanNumbers.getByValue(resultOfCalculation));
+                break;
             }
             i+=10;
         }
